@@ -43,7 +43,9 @@ function searchByTraits(people) {
    return app(people);
 
 	case "age":
-	 filteredPeople = searchByAge(people);
+	 displayPeople(searchByAge(people));
+   return app(people);
+
 	case "occupation":
 	 displayPeople(searchByOccupation(people));
    return app(people);
@@ -104,7 +106,21 @@ function searchByGender(people){
 }
 
 function searchByAge(people) {
-	
+	let userInputAge = prompt("What age is the person?");
+
+  let results = people.filter(function(el){
+   return calculateAge(new Date(el.dob)) == userInputAge;
+  })
+  return results;
+}
+
+function calculateAge(dob){
+  let now = new Date();
+  let age = now - dob;
+
+  age = Math.floor(age/1000/60/60/24/365);
+
+  return age
 }
 
 function searchByOccupation(people){
