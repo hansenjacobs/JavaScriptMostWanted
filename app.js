@@ -85,9 +85,26 @@ function searchByEyeColor(people) {
 
 function searchByAge(people) {
   let userInputAge = prompt("How old is the person?");
-  let newArray = people.filter(function (el) {
-	  if(2018 -
-
+  let newArray = people.map(function (el) {
+	  return new date(el.dob);
+  });
+  let newArray2 = newArray.map(function (el) {
+	  return new el.toDateString();
+  });
+  let d = Date.now();
+  let newArray3 = newArray2.map(function (el) {
+		return d - Date.parse(el);
+  })
+  let newArray4 = newArray3.map(function (el) {
+	return parseInt(el / 86,400,000) / 365.25);
+  })
+  let newArray5 = newArray4.filter(function (el) {
+		if(el == unserInputAge) {
+			return true;
+		}
+  })
+  displayPeople(newArray5);
+  }
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
