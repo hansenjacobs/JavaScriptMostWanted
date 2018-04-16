@@ -36,12 +36,14 @@ function searchByTraits(people) {
       break;
     // so on and so forth
 	case "eye color":
+    displayPeople(searchByEyeColor(people));
+    return app(people);
 	case "gender":
-	
+	 // Jake
 	case "age":
 	 filteredPeople = searchByAge(people);
 	case "occupation":
-	
+	 // Jake
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -82,12 +84,17 @@ function searchByWeight(people) {
 
 function searchByEyeColor(people) {
   let userInputEyeColor = prompt("What color eyes does the person have?");
+  let results = people.filter(function(el){
+    return el.eyeColor === userInputEyeColor;
+  })
+  return results;
+}
 
-function searchByAge(people) {
-  let userInputAge = prompt("How old is the person?");
-  let newArray = people.filter(function (el) {
-	  if(2018 -
-
+// function searchByAge(people) {
+//   let userInputAge = prompt("How old is the person?");
+//   let newArray = people.filter(function (el) {
+// 	  if(2018 -
+// }
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -198,5 +205,3 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
-
-console.log(listDescendants(data[1], data, 0));
