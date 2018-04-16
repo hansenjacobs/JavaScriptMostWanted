@@ -28,11 +28,20 @@ function searchByTraits(people) {
   switch(userSearchChoice) {
     case "height":
       filteredPeople = searchByHeight(people);
+	  displayPeople(newArray);
       break;
     case "weight":
       filteredPeople = searchByWeight(people);
+	  displayPeople(newArray);
       break;
     // so on and so forth
+	case "eye color":
+	case "gender":
+	
+	case "age":
+	 filteredPeople = searchByAge(people);
+	case "occupation":
+	
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -43,6 +52,19 @@ function searchByTraits(people) {
 
   mainMenu(foundPerson, people);
 
+}
+
+function searchByHeight(people) {
+  let userInputHeight = prompt("How tall is the person?");
+
+  let newArray = people.filter(function (el) {
+    if(el.height == userInputHeight) {
+      return true;
+    }
+    // return true if el.height matches userInputHeight
+  });
+
+  return newArray;
 }
 
 function searchByWeight(people) {
@@ -57,6 +79,14 @@ function searchByWeight(people) {
 
   return newArray;
 }
+
+function searchByEyeColor(people) {
+  let userInputEyeColor = prompt("What color eyes does the perso have?
+
+function searchByAge(people) {
+  let userInputAge = prompt("How old is the person?");
+  let newArray = people.filter(function (el) {
+	  if(2018 -
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -75,6 +105,16 @@ function mainMenu(person, people){
       displayPerson(person);
       break;
     case "family":
+	  let family = [];
+	  //create a new array of the people who match the person's last name
+	  for (i=0; i < people.length; i++){
+	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)) {
+	    //push people who match person's last name to the new array
+	    family.push(people[i]);
+	    }
+	  }
+	  //pass the new array into the displayPeople function
+	  displayPeople(family);
     // TODO: get person's family
     break;
     case "descendants":
