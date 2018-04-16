@@ -102,11 +102,11 @@ function searchByGender(people){
   return results;
 }
 
-// function searchByAge(people) {
-//   let userInputAge = prompt("How old is the person?");
-//   let newArray = people.filter(function (el) {
-// 	  if(2018 -
-// }
+function searchByAge(people) {
+  let userInputAge = prompt("How old is the person?");
+  let newArray = people.filter(function (el) {
+	  if(2018 -
+}
 
 function searchByOccupation(people){
   let userInputOccupation = prompt("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'");
