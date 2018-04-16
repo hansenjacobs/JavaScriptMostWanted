@@ -45,7 +45,9 @@ function searchByTraits(people) {
 	case "age":
 	 filteredPeople = searchByAge(people);
 	case "occupation":
-	 // Jake
+	 displayPeople(searchByOccupation(people));
+   return app(people);
+
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -105,6 +107,15 @@ function searchByGender(people){
 //   let newArray = people.filter(function (el) {
 // 	  if(2018 -
 // }
+
+function searchByOccupation(people){
+  let userInputOccupation = prompt("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'");
+  let results = people.filter(function(el){
+    return el.occupation === userInputOccupation;
+  })
+  return results;
+}
+
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -223,8 +234,8 @@ function chars(input){
 //determine uqniue values from data
 // let arr = [];
 // for(let i = 0; i < data.length; i++){
-//   if(!arr.includes(data[i].eyeColor)){
-//     arr.push(data[i].eyeColor);
+//   if(!arr.includes(data[i].occupation)){
+//     arr.push(data[i].occupation);
 //   }
 // }
 // console.log(arr);
