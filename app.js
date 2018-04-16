@@ -73,13 +73,13 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       displayPerson(person);
-      break;
+      return mainMenu(person, people);
     case "family":
     // TODO: get person's family
     break;
     case "descendants":
-    // TODO: get person's descendants
-    break;
+      displayPeople(listDescendants(person, people, 0));
+      return mainMenu(person, people);
     case "restart":
     app(people); // restart
     break;
@@ -114,8 +114,6 @@ function displayPeople(people){
 }
 
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
@@ -126,6 +124,21 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.occupation + "\n";
   
   alert(personInfo);
+}
+
+function listDescendants(person, people, indexPeople, descendants = []){
+  // MUST USE RECURSION
+  if(people[indexPeople].parents.includes(person.id)){
+      descendants.push(people[indexPeople]);
+    }
+
+  if(indexPeople < people.length - 1){
+    // run next recursion
+    return listDescendants(person, people, indexPeople + 1, descendants);
+  } else {
+    // return, ending recursion
+    return descendants;
+  }
 }
 
 // function that prompts and validates user input
@@ -145,3 +158,5 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+console.log(listDescendants(data[1], data, 0));
