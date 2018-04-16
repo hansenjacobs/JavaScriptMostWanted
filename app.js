@@ -34,14 +34,20 @@ function searchByTraits(people) {
       filteredPeople = searchByWeight(people);
 	  displayPeople(newArray);
       break;
-    // so on and so forth
 	case "eye color":
+    displayPeople(searchByEyeColor(people));
+    return app(people);
+
 	case "gender":
-	
+	 displayPeople(searchByGender(people));
+   return app(people);
+
 	case "age":
 	 filteredPeople = searchByAge(people);
 	case "occupation":
-	
+	 displayPeople(searchByOccupation(people));
+   return app(people);
+
     default:
       alert("You entered an invalid search type! Please try again.");
       searchByTraits(people);
@@ -81,38 +87,34 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-  let userInputEyeColor = prompt("What color eyes does the person have?");
+  let userInputEyeColor = prompt("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'");
+  let results = people.filter(function(el){
+    return el.eyeColor === userInputEyeColor;
+  })
+  return results;
+}
+
+function searchByGender(people){
+  let userInputGender = prompt("What gender is the person? 'male', 'female'");
+  let results = people.filter(function(el){
+    return el.gender === userInputGender;
+  })
+  return results;
+
 }
 
 function searchByAge(people) {
-  let userInputAge = prompt("How old is the person?");
-  let newArray = people.map(function (el) {
-	  let n = new Date(el.dob);
-	  return n;
-  });
-  let newArray2 = newArray.map(function (el) {
-	  let n = el.toDateString();
-	  return n;
-  });
-  let d = Date.now();
-  let newArray3 = newArray2.map(function (el) {
-		return d - Date.parse(el);
+	
+}
+
+function searchByOccupation(people){
+  let userInputOccupation = prompt("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'");
+  let results = people.filter(function(el){
+    return el.occupation === userInputOccupation;
   })
-  let newArray4 = newArray3.map(function (el) {
-	let n = (el / 86400000);
-	console.log(n);
-	let m = n/365;
-	console.log(m);
-	let p = parseInt(m);
-	return p;
-  })
-  let newArray5 = newArray4.filter(function (el) {
-		if(el == userInputAge) {
-			return true;
-		}
-  })
-  displayPeople(newArray5);
-  }
+  return results;
+}
+
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -173,9 +175,13 @@ function searchByName(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
+  if(people.length > 0){
+    alert(people.map(function(person){
+      return person.firstName + " " + person.lastName;
+    }).join("\n"));
+  } else {
+    alert("No results.")
+  }
 }
 
 function displayPerson(person){
@@ -224,4 +230,11 @@ function chars(input){
   return true; // default validation only
 }
 
-console.log(listDescendants(data[1], data, 0));
+//determine uqniue values from data
+// let arr = [];
+// for(let i = 0; i < data.length; i++){
+//   if(!arr.includes(data[i].occupation)){
+//     arr.push(data[i].occupation);
+//   }
+// }
+// console.log(arr);
