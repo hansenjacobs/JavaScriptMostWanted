@@ -81,7 +81,7 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-  let userInputEyeColor = prompt("What color eyes does the perso have?
+  let userInputEyeColor = prompt("What color eyes does the person have?");
 
 function searchByAge(people) {
   let userInputAge = prompt("How old is the person?");
