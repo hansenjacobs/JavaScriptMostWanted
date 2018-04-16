@@ -34,12 +34,14 @@ function searchByTraits(people) {
       filteredPeople = searchByWeight(people);
 	  displayPeople(newArray);
       break;
-    // so on and so forth
 	case "eye color":
     displayPeople(searchByEyeColor(people));
     return app(people);
+
 	case "gender":
-	 // Jake
+	 displayPeople(searchByGender(people));
+   return app(people);
+
 	case "age":
 	 filteredPeople = searchByAge(people);
 	case "occupation":
@@ -83,9 +85,17 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-  let userInputEyeColor = prompt("What color eyes does the person have?");
+  let userInputEyeColor = prompt("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'");
   let results = people.filter(function(el){
     return el.eyeColor === userInputEyeColor;
+  })
+  return results;
+}
+
+function searchByGender(people){
+  let userInputGender = prompt("What gender is the person? 'male', 'female'");
+  let results = people.filter(function(el){
+    return el.gender === userInputGender;
   })
   return results;
 }
@@ -209,3 +219,12 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+//determine uqniue values from data
+// let arr = [];
+// for(let i = 0; i < data.length; i++){
+//   if(!arr.includes(data[i].eyeColor)){
+//     arr.push(data[i].eyeColor);
+//   }
+// }
+// console.log(arr);
