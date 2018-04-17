@@ -308,7 +308,7 @@ function listDescendants(person, people, indexPeople, descendants = []){
     return listDescendants(person, people, indexPeople + 1, descendants);
   } else {
     return descendants;
-  }
+  }  
 }
 
 
