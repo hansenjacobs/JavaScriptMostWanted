@@ -103,7 +103,7 @@ function calculateAge(dob){
   let now = new Date();
   let age = now - dob;
 
-  age = Math.floor(age/1000/60/60/24/365);
+  age = Math.floor(age/1000/60/60/24/365.25);
 
   return age
 }
