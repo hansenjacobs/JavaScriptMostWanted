@@ -20,12 +20,14 @@ function searchByTraits(people) {
   switch(userSearchChoice) {
     case "height":
 	  let userInputHeight = promptFor("How tall is the person?", chars);
-	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" "\n";
+	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n";
       displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return;
 
     case "weight":
-      displayPeopleTraitResults(searchByWeight(people));
+	  let userInputWeight = promptFor("How much does the person weigh?", chars);
+	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n";
+      displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
       return;
 
   	case "eye color":
@@ -52,7 +54,6 @@ function searchByTraits(people) {
 }
 
 function searchByHeight(people, userInputHeight) {
-
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
       return true;
@@ -62,9 +63,7 @@ function searchByHeight(people, userInputHeight) {
   return newArray;
 }
 
-function searchByWeight(people) {
-  let userInputWeight = promptFor("How much does the person weigh?", chars);
-
+function searchByWeight(people, userInputWeight) {
   let newArray = people.filter(function (el) {
     if(el.weight == userInputWeight) {
       return true;
