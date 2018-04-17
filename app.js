@@ -44,13 +44,13 @@ function searchByTraits(people) {
 
   	case "age":
 	  let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAgeString + ":" + "\n\n";
-      displayPeopleTraitResults(searchByAge(people, userInputAge));
+	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAge + ":" + "\n\n";
+      displayPeopleTraitResults(searchByAge(people, userInputAge), userInputAgeString);
       return;
 
   	case "occupation":
 	  let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
-	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputEyeColor + ":" + "\n\n";
+	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputOccupation + ":" + "\n\n";
       displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
       return;
 
@@ -114,7 +114,7 @@ function calculateAge(dob){
   return age
 }
 
-function searchByOccupation(people){
+function searchByOccupation(people, userInputOccupation){
   let results = people.filter(function(el){
     return el.occupation.toLowerCase() === userInputOccupation.toLowerCase();
   })
@@ -263,13 +263,13 @@ function displayPeopleTraitResults(people, header){
 
     case "age":
       let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-      let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAgeString + ":" + "\n\n";
-      displayPeopleTraitResults(searchByAge(people, userInputAge));
+      let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAge + ":" + "\n\n";
+      displayPeopleTraitResults(searchByAge(people, userInputAge), userInputAgeString);
       return app(people);
 
     case "occupation":
       let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
-	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputEyeColor + ":" + "\n\n";
+	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputOccupation + ":" + "\n\n";
       displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
       return app(people);
 
