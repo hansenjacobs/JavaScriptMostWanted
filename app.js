@@ -111,7 +111,7 @@ function calculateAge(dob){
 function searchByOccupation(people){
   let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
   let results = people.filter(function(el){
-    return el.occupation === userInputOccupation;
+    return el.occupation.toLowerCase() === userInputOccupation.toLowerCase();
   })
   return results;
 }
@@ -133,7 +133,6 @@ function mainMenu(person, people){
     case "family":
       alert("FAMILY: \n" + listFamily(person, people));
       return mainMenu(person, people);
-      // Change to return back to Main Menu
     case "descendants":
       displayPeople(listDescendants(person, people, 0), "DESCENDANTS: \n");
       return mainMenu(person, people);
@@ -232,7 +231,7 @@ function displayPeopleTraitResults(people, header){
     userInput = promptFor("No results.\n\nEnter 'restart' or 'quit'.", chars)
   }
 
-  switch(userInput) {
+  switch(userInput.toLowerCase()) {
     case "height":
       displayPeopleTraitResults(searchByHeight(people));
       return app(people);
@@ -274,7 +273,7 @@ function displayPerson(person){
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
-  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "DOB: " + person.dob + " (" + calculateAge(new Date(person.dob)) + " years old)\n";
   personInfo += "Height: " + person.height + "\"\n";
   personInfo += "Weight: " + person.weight + "lbs\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
