@@ -128,14 +128,14 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      displayPerson(person);
+      displayPerson(person, "INFO: \n");
       return mainMenu(person, people);
     case "family":
-      alert(listFamily(person, people));
+      alert("FAMILY: \n" + listFamily(person, people));
       return mainMenu(person, people);
       // Change to return back to Main Menu
     case "descendants":
-      displayPeople(listDescendants(person, people, 0));
+      displayPeople(listDescendants(person, people, 0), "DESCENDANTS: \n");
       return mainMenu(person, people);
     case "restart":
       return app(people);
@@ -211,9 +211,9 @@ function listPeopleAsString(people){
   return string;
 }
 
-function displayPeople(people){
+function displayPeople(people, header){
   if(people.length > 0){
-    alert(people.map(function(person){
+    alert(header + people.map(function(person){
       return person.firstName + " " + person.lastName;
     }).join("\n"));
   } else {
@@ -221,7 +221,7 @@ function displayPeople(people){
   }
 }
 
-function displayPeopleTraitResults(people){
+function displayPeopleTraitResults(people, header){
   let userInput;
 
   if(people.length > 0){
