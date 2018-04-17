@@ -1,6 +1,6 @@
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no' or 'quit'", yesNoQuit).toLowerCase();
-  switch(searchType){
+  switch(searchType.toLowerCase()){
     case 'yes':
       return mainMenu(searchByName(people), people);
     case 'no':
@@ -17,7 +17,7 @@ function app(people){
 function searchByTraits(people) {
   let userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.", chars);
 
-  switch(userSearchChoice) {
+  switch(userSearchChoice.toLowerCase()) {
     case "height":
       displayPeopleTraitResults(searchByHeight(people));
       return;
@@ -50,7 +50,7 @@ function searchByTraits(people) {
 }
 
 function searchByHeight(people) {
-  let userInputHeight = promptFor("How tall is the person in inches? Ex. '72'", chars);
+  let userInputHeight = promptFor("How tall is the person in inches? Ex. '72'", numbers);
 
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
@@ -76,7 +76,7 @@ function searchByWeight(people) {
 function searchByEyeColor(people) {
   let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
   let results = people.filter(function(el){
-    return el.eyeColor === userInputEyeColor;
+    return el.eyeColor.toLowerCase() === userInputEyeColor.toLowerCase();
   })
   return results;
 }
@@ -84,7 +84,7 @@ function searchByEyeColor(people) {
 function searchByGender(people){
   let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
   let results = people.filter(function(el){
-    return el.gender === userInputGender;
+    return el.gender.toLowerCase() === userInputGender.toLowerCase();
   })
   return results;
 
@@ -124,9 +124,9 @@ function mainMenu(person, people){
     return app(people);
   }
 
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", chars);
 
-  switch(displayOption){
+  switch(displayOption.toLowerCase()){
     case "info":
       displayPerson(person, "INFO: \n");
       return mainMenu(person, people);
