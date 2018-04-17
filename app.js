@@ -14,8 +14,10 @@ function app(people){
   }
 }
 
-function searchByTraits(people) {
-  let userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit'", chars);
+function searchByTraits(people, userSearchChoice) {
+  if(userSearchChoice === undefined){
+    userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit'", chars);
+  }
 
   switch(userSearchChoice.toLowerCase()) {
     case "height":
@@ -236,47 +238,7 @@ function displayPeopleTraitResults(people, header){
     userInput = promptFor(header + "No results.\n\nEnter 'restart' or 'quit'.", chars)
   }
 
-  switch(userInput.toLowerCase()) {
-    case "height":
-      let userInputHeight = promptFor("How tall is the person?", numbers);
-      let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
-
-    case "weight":
-      let userInputWeight = promptFor("How much does the person weigh?", numbers);
-      let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
-
-    case "eye color":
-      let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
-      let userInputEyeColorString = "PEOPLE WHO HAVE AN EYE COLOR OF " + userInputEyeColor + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
-
-    case "gender":
-      let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
-      let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
-
-    case "age":
-      let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-      let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAge + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByAge(people, userInputAge), userInputAgeString);
-
-    case "occupation":
-      let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
-      let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputOccupation + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
-
-    case "quit":
-      return;
-
-    case "restart":
-      return app(data);
-
-    default:
-      alert("You entered an invalid search type! Please try again.");
-      return searchByTraits(people);
-  }  
+  return searchByTraits(people, userInput);  
 
 }
 
