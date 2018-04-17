@@ -44,7 +44,7 @@ function searchByTraits(people) {
 
   	case "age":
 	  let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputEyeColor + ":" + "\n\n";
+	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAgeString + ":" + "\n\n";
       displayPeopleTraitResults(searchByAge(people, userInputAge));
       return;
 
@@ -263,7 +263,7 @@ function displayPeopleTraitResults(people, header){
 
     case "age":
       let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputEyeColor + ":" + "\n\n";
+      let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAgeString + ":" + "\n\n";
       displayPeopleTraitResults(searchByAge(people, userInputAge));
       return app(people);
 
