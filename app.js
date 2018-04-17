@@ -234,7 +234,9 @@ function displayPeopleTraitResults(people, header){
 
   switch(userInput) {
     case "height":
-      displayPeopleTraitResults(searchByHeight(people));
+	  let userInputHeight = promptFor("How tall is the person?", chars);
+	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n";
+      displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return app(people);
 
     case "weight":
