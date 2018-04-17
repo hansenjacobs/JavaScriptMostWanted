@@ -151,6 +151,7 @@ function listFamily(person, people) {
   let siblings = [];
   let children = [];
   let spouse;
+  let output = ""
 
     for (let i = 0; i < people.length; i++){
       if(people[i].parents.includes(person.id)){
@@ -168,7 +169,16 @@ function listFamily(person, people) {
       }
     }
 
-  return "PARENTS\n" + listPeopleAsString(parents) + "\n\nSIBLINGS\n" + listPeopleAsString(siblings) + "\n\nSPOUSE: " + spouse.firstName + " " + spouse.lastName + "\n\nCHILDREN\n" + listPeopleAsString(children);
+  output += "PARENTS\n" + listPeopleAsString(parents) + "\n\n";
+  output += "SIBLINGS\n" + listPeopleAsString(siblings) + "\n\n";
+  if(spouse !== undefined){
+    output += "SPOUSE: " + spouse.firstName + " " + spouse.lastName + "\n\n";
+  } else {
+    output += "SPOUSE: No results.\n\n"
+  }
+  output += "CHILDREN\n" + listPeopleAsString(children);
+
+  return output;
 }
 
 function searchByName(people){
