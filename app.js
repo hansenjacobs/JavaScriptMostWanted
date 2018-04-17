@@ -297,7 +297,7 @@ function displayPerson(person, header){
   personInfo += "Occupation: " + person.occupation + "\n";
   
   alert(header + " for " + person.firstName + " " + person.lastName + ":" + "\n\n" + personInfo);
-}
+} 
 
 function listDescendants(person, people, indexPeople, descendants = []){
   if(people[indexPeople].parents.includes(person.id)){
