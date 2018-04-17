@@ -131,9 +131,8 @@ function mainMenu(person, people){
       displayPerson(person);
       return mainMenu(person, people);
     case "family":
-	  let familyArray = findFamily(person, people);
-  	  displayPeople(familyArray);
-      break;
+      alert(listFamily(person, people))
+      return app(people);
       // Change to return back to Main Menu
     case "descendants":
       displayPeople(listDescendants(person, people, 0));
@@ -147,21 +146,45 @@ function mainMenu(person, people){
   }
 }
 
- function findFamily(person, people) {
-	  let family = [];
-  	  for (i=0; i < people.length; i++){
-  	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)){
-  	    family.push(people[i]);
-  	    }
-		//if (people[i].parents.includes(person.id)
-  	  }
+function findFamily(person, people) {
+  let family = [];
 	  for (i=0; i < people.length; i++){
-		if(person.parents[0] == people[i].parents[0] || person.parents[1] == people[i].parents[1]){
-		family.push(people[i]);
-		}
+	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)){
+	    family.push(people[i]);
+	    }
+	
 	  }
-  	  return family;
- }
+  for (i=0; i < people.length; i++){
+  	if(person.parents[0] == people[i].parents[0] || person.parents[1] == people[i].parents[1]){
+    	family.push(people[i]);
+    	}
+  }
+	return family;
+}
+
+function listFamily(person, people) {
+  let parents = [];
+  let siblings = [];
+  let children = [];
+  let spouse;
+
+    for (let i = 0; i < people.length; i++){
+      if(people[i].parents.includes(person.id)){
+        children.push(people[i]);
+      } else if(person.parents.includes(people[i].id)){
+        parents.push(people[i]);
+      } else if(person.id === people[i].currentSpouse){
+        spouse = people[i];
+      } else {
+        for(let index = 0; index < person.parents.length; index++){
+          if(people[i].parents.includes(person.parents[index])){
+            siblings.push(people[i])
+          }
+        }
+      }
+
+  return "PARENTS\n" + listPeopleAsString(parents) + "\nSIBLINGS\n" + listPeopleAsString(siblings) + "\nSPOUSE: " + spouse.firstName + " " + spouse.lastName + "\n\nCHILDREN\n" + listPeopleAsString(children);
+}
 
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
@@ -177,6 +200,17 @@ function searchByName(people){
 
   return results[0];
 
+}
+
+function listPeopleAsString(people){
+  let string;
+  if(people.length > 0){
+    string = people.map(function(person){
+      return person.firstName + " " + person.lastName;
+    }).join("\n");
+  } else {
+    string = "No results."
+  }
 }
 
 function displayPeople(people){
