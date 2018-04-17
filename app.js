@@ -131,8 +131,7 @@ function mainMenu(person, people){
       displayPerson(person);
       return mainMenu(person, people);
     case "family":
-	  let familyArray = [];
-	  familyArray = findFamily(person, people);
+	  let familyArray = findFamily(person, people);
   	  displayPeople(familyArray);
       break;
       // Change to return back to Main Menu
