@@ -154,16 +154,18 @@ function listFamily(person, people) {
   let output = ""
 
     for (let i = 0; i < people.length; i++){
-      if(people[i].parents.includes(person.id)){
-        children.push(people[i]);
-      } else if(person.parents.includes(people[i].id)){
-        parents.push(people[i]);
-      } else if(person.id === people[i].currentSpouse){
-        spouse = people[i];
-      } else {
-        for(let index = 0; index < person.parents.length; index++){
-          if(people[i].parents.includes(person.parents[index])){
-            siblings.push(people[i])
+      if(person.id !== people[i].id){
+        if(people[i].parents.includes(person.id)){
+          children.push(people[i]);
+        } else if(person.parents.includes(people[i].id)){
+          parents.push(people[i]);
+        } else if(person.id === people[i].currentSpouse){
+          spouse = people[i];
+        } else {
+          for(let index = 0; index < person.parents.length && !siblings.includes(people[i]); index++){
+            if(people[i].parents.includes(person.parents[index])){
+              siblings.push(people[i])
+            }
           }
         }
       }
@@ -172,9 +174,9 @@ function listFamily(person, people) {
   output += "PARENTS\n" + listPeopleAsString(parents) + "\n\n";
   output += "SIBLINGS\n" + listPeopleAsString(siblings) + "\n\n";
   if(spouse !== undefined){
-    output += "SPOUSE: " + spouse.firstName + " " + spouse.lastName + "\n\n";
+    output += "SPOUSE\n" + spouse.firstName + " " + spouse.lastName + "\n\n";
   } else {
-    output += "SPOUSE: No results.\n\n"
+    output += "SPOUSE\nNo results.\n\n"
   }
   output += "CHILDREN\n" + listPeopleAsString(children);
 
