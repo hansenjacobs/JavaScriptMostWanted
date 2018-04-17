@@ -1,21 +1,15 @@
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
-
-// app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no' or 'quit'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
       return mainMenu(searchByName(people), people);
-      // add functionality - if more than one person is returned, first display all results and let user determine which to display
     case 'no':
       return searchByTraits(people);
     case 'quit':
       return;
     default:
       alert("Wrong! Please try again, following the instructions dummy. :)");
-      app(people); // restart app
+      app(people);
     break;
   }
 }
@@ -62,7 +56,6 @@ function searchByHeight(people) {
     if(el.height == userInputHeight) {
       return true;
     }
-    // return true if el.height matches userInputHeight
   });
 
   return newArray;
@@ -75,7 +68,6 @@ function searchByWeight(people) {
     if(el.weight == userInputWeight) {
       return true;
     }
-    // return true if el.height matches userInputHeight
   });
 
   return newArray;
@@ -124,14 +116,12 @@ function searchByOccupation(people){
   return results;
 }
 
-// Menu function to call once you find who you are looking for
-function mainMenu(person, people){
 
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+function mainMenu(person, people){
 
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(people);
   }
 
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
@@ -142,27 +132,23 @@ function mainMenu(person, people){
       return mainMenu(person, people);
     case "family":
 	  let family = [];
-	  //create a new array of the people who match the person's last name
-	  for (i=0; i < people.length; i++){
-	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)) {
-	    //push people who match person's last name to the new array
-	    family.push(people[i]);
-	    }
-	  }
-	  //pass the new array into the displayPeople function
-	  displayPeople(family);
-    // TODO: get person's family
-    break;
+  	  for (i=0; i < people.length; i++){
+  	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)) {
+  	    family.push(people[i]);
+  	    }
+  	  }
+  	  displayPeople(family);
+      break;
     case "descendants":
       displayPeople(listDescendants(person, people, 0));
       return mainMenu(person, people);
     case "restart":
-      app(people); // restart
+      app(people);
       break;
     case "quit":
-      return; // stop execution
+      return;
     default:
-      return mainMenu(person, people); // ask again
+      return mainMenu(person, people);
   }
 }
 
@@ -182,7 +168,6 @@ function searchByName(people){
 
 }
 
-// alerts a list of people
 function displayPeople(people){
   if(people.length > 0){
     alert(people.map(function(person){
@@ -256,21 +241,18 @@ function displayPerson(person){
 }
 
 function listDescendants(person, people, indexPeople, descendants = []){
-  // MUST USE RECURSION
   if(people[indexPeople].parents.includes(person.id)){
       descendants.push(people[indexPeople]);
     }
 
   if(indexPeople < people.length - 1){
-    // run next recursion
     return listDescendants(person, people, indexPeople + 1, descendants);
   } else {
-    // return, ending recursion
     return descendants;
   }
 }
 
-// function that prompts and validates user input
+
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
@@ -278,21 +260,11 @@ function promptFor(question, valid){
   return response;
 }
 
-// helper function to pass into promptFor to validate yes/no answers
+
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no" || input.toLowerCase() == "quit";
 }
 
-// helper function to pass in as default promptFor validation
 function chars(input){
-  return true; // default validation only
+  return true;
 }
-
-//determine uqniue values from data
-// let arr = [];
-// for(let i = 0; i < data.length; i++){
-//   if(!arr.includes(data[i].occupation)){
-//     arr.push(data[i].occupation);
-//   }
-// }
-// console.log(arr);
