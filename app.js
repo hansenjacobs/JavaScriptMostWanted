@@ -334,7 +334,7 @@ function chars(input){
 }
 
 function numbers(input){
-  return isNaN(input);
+  return !isNaN(input);
 }
 
 function gender(input){
