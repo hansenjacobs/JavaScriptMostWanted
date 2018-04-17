@@ -20,34 +20,38 @@ function searchByTraits(people) {
   switch(userSearchChoice.toLowerCase()) {
     case "height":
 	  let userInputHeight = promptFor("How tall is the person?", chars);
-	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n";
+	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return;
 
     case "weight":
 	  let userInputWeight = promptFor("How much does the person weigh?", chars);
-	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n";
+	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
       return;
 
   	case "eye color":
 	  let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
-	  let userInputEyeColorString = "PEOPLE WHO HAVE An EYE COLOR OF " + userInputEyeColor + ":" + "\n";
+	  let userInputEyeColorString = "PEOPLE WHO HAVE AN EYE COLOR OF " + userInputEyeColor + ":" + "\n\n";
       displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
       return;
 
   	case "gender":
 	  let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
-	  let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n";
+	  let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n\n";
       displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
       return;
 
   	case "age":
-      displayPeopleTraitResults(searchByAge(people));
+	  let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
+	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputEyeColor + ":" + "\n\n";
+      displayPeopleTraitResults(searchByAge(people, userInputAge));
       return;
 
   	case "occupation":
-      displayPeopleTraitResults(searchByOccupation(people));
+	  let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
+	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputEyeColor + ":" + "\n\n";
+      displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
       return;
 
     default:
@@ -94,9 +98,7 @@ function searchByGender(people, userInputGender){
 
 }
 
-function searchByAge(people) {
-	let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-
+function searchByAge(people, userInputAge) {
   let results = people.filter(function(el){
    return calculateAge(new Date(el.dob)) == userInputAge;
   })
@@ -113,7 +115,6 @@ function calculateAge(dob){
 }
 
 function searchByOccupation(people){
-  let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
   let results = people.filter(function(el){
     return el.occupation.toLowerCase() === userInputOccupation.toLowerCase();
   })
@@ -132,13 +133,13 @@ function mainMenu(person, people){
 
   switch(displayOption.toLowerCase()){
     case "info":
-      displayPerson(person, "INFO: \n");
+      displayPerson(person, "Info");
       return mainMenu(person, people);
     case "family":
-      alert("FAMILY: \n" + listFamily(person, people));
+      alert("FAMILY: \n\n" + listFamily(person, people));
       return mainMenu(person, people);
     case "descendants":
-      displayPeople(listDescendants(person, people, 0), "DESCENDANTS: \n");
+      displayPeople(listDescendants(person, people, 0), "DESCENDANTS: \n\n");
       return mainMenu(person, people);
     case "restart":
       return app(people);
@@ -238,34 +239,38 @@ function displayPeopleTraitResults(people, header){
   switch(userInput.toLowerCase()) {
     case "height":
 	  let userInputHeight = promptFor("How tall is the person?", chars);
-	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n";
+	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return app(people);
 
     case "weight":
       let userInputWeight = promptFor("How much does the person weigh?", chars);
-	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n";
+	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
       return app(people);
 
     case "eye color":
       let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
-	  let userInputEyeColorString = "PEOPLE WHO HAVE An EYE COLOR OF " + userInputEyeColor + ":" + "\n";
+	  let userInputEyeColorString = "PEOPLE WHO HAVE An EYE COLOR OF " + userInputEyeColor + ":" + "\n\n";
       displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
       return app(people);
 
     case "gender":
       let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
-	  let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n";
+	  let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n\n";
       displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
       return app(people);
 
     case "age":
-      displayPeopleTraitResults(searchByAge(people));
+      let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
+	  let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputEyeColor + ":" + "\n\n";
+      displayPeopleTraitResults(searchByAge(people, userInputAge));
       return app(people);
 
     case "occupation":
-      displayPeopleTraitResults(searchByOccupation(people));
+      let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
+	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputEyeColor + ":" + "\n\n";
+      displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
       return app(people);
 
     case "restart":
@@ -281,7 +286,7 @@ function displayPeopleTraitResults(people, header){
 
 }
 
-function displayPerson(person){
+function displayPerson(person, header){
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
@@ -291,7 +296,7 @@ function displayPerson(person){
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   
-  alert(personInfo);
+  alert(header + " for " + person.firstName + " " + person.lastName + ":" + "\n\n" + personInfo);
 }
 
 function listDescendants(person, people, indexPeople, descendants = []){
