@@ -15,7 +15,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+  let userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.", chars);
 
   switch(userSearchChoice) {
     case "height":
@@ -50,7 +50,7 @@ function searchByTraits(people) {
 }
 
 function searchByHeight(people) {
-  let userInputHeight = prompt("How tall is the person?");
+  let userInputHeight = promptFor("How tall is the person?", chars);
 
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
@@ -62,7 +62,7 @@ function searchByHeight(people) {
 }
 
 function searchByWeight(people) {
-  let userInputWeight = prompt("How much does the person weigh?");
+  let userInputWeight = promptFor("How much does the person weigh?", chars);
 
   let newArray = people.filter(function (el) {
     if(el.weight == userInputWeight) {
@@ -74,7 +74,7 @@ function searchByWeight(people) {
 }
 
 function searchByEyeColor(people) {
-  let userInputEyeColor = prompt("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'");
+  let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
   let results = people.filter(function(el){
     return el.eyeColor === userInputEyeColor;
   })
@@ -82,7 +82,7 @@ function searchByEyeColor(people) {
 }
 
 function searchByGender(people){
-  let userInputGender = prompt("What gender is the person? 'male', 'female'");
+  let userInputGender = promptFor("What gender is the person? 'male', 'female'", chars);
   let results = people.filter(function(el){
     return el.gender === userInputGender;
   })
@@ -109,7 +109,7 @@ function calculateAge(dob){
 }
 
 function searchByOccupation(people){
-  let userInputOccupation = prompt("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'");
+  let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
   let results = people.filter(function(el){
     return el.occupation === userInputOccupation;
   })
@@ -139,12 +139,12 @@ function mainMenu(person, people){
   	  }
   	  displayPeople(family);
       break;
+      // Change to return back to Main Menu
     case "descendants":
       displayPeople(listDescendants(person, people, 0));
       return mainMenu(person, people);
     case "restart":
-      app(people);
-      break;
+      return app(people);
     case "quit":
       return;
     default:
@@ -182,11 +182,11 @@ function displayPeopleTraitResults(people){
   let userInput;
 
   if(people.length > 0){
-    userInput = prompt(people.map(function(person){
+    userInput = promptFor(people.map(function(person){
       return person.firstName + " " + person.lastName;
-    }).join("\n") + "\n\nTo narrow results further, enter the trait you would like to search by - 'height', 'weight', 'eye color' 'gender', 'age', 'occupation' - or enter 'restart' or 'quit'");
+    }).join("\n") + "\n\nTo narrow results further, enter the trait you would like to search by - 'height', 'weight', 'eye color' 'gender', 'age', 'occupation' - or enter 'restart' or 'quit'", chars);
   } else {
-    userInput = prompt("No results.\n\nEnter 'restart' or 'quit'.")
+    userInput = promptFor("No results.\n\nEnter 'restart' or 'quit'.", chars)
   }
 
   switch(userInput) {
