@@ -131,13 +131,9 @@ function mainMenu(person, people){
       displayPerson(person);
       return mainMenu(person, people);
     case "family":
-	  let family = [];
-  	  for (i=0; i < people.length; i++){
-  	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)) {
-  	    family.push(people[i]);
-  	    }
-  	  }
-  	  displayPeople(family);
+	  let familyArray = [];
+	  familyArray = findFamily(person, people);
+  	  displayPeople(familyArray);
       break;
     case "descendants":
       displayPeople(listDescendants(person, people, 0));
@@ -151,6 +147,22 @@ function mainMenu(person, people){
       return mainMenu(person, people);
   }
 }
+
+ function findFamily(person, people) {
+	  let family = [];
+  	  for (i=0; i < people.length; i++){
+  	    if (people[i].parents.includes(person.id) || person.id == people[i].currentSpouse || person.parents.includes(people[i].id)){
+  	    family.push(people[i]);
+  	    }
+		//if (people[i].parents.includes(person.id)
+  	  }
+	  for (i=0; i < people.length; i++){
+		if(person.parents[0] == people[i].parents[0] || person.parents[1] == people[i].parents[1]){
+		family.push(people[i]);
+		}
+	  }
+  	  return family;
+ }
 
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
