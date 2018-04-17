@@ -19,7 +19,9 @@ function searchByTraits(people) {
 
   switch(userSearchChoice) {
     case "height":
-      displayPeopleTraitResults(searchByHeight(people));
+	  let userInputHeight = promptFor("How tall is the person?", chars);
+	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" "\n";
+      displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return;
 
     case "weight":
@@ -49,8 +51,7 @@ function searchByTraits(people) {
 
 }
 
-function searchByHeight(people) {
-  let userInputHeight = promptFor("How tall is the person?", chars);
+function searchByHeight(people, userInputHeight) {
 
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
@@ -225,11 +226,11 @@ function displayPeopleTraitResults(people, header){
   let userInput;
 
   if(people.length > 0){
-    userInput = promptFor(people.map(function(person){
+    userInput = promptFor(header + people.map(function(person){
       return person.firstName + " " + person.lastName;
     }).join("\n") + "\n\nTo narrow results further, enter the trait you would like to search by - 'height', 'weight', 'eye color' 'gender', 'age', 'occupation' - or enter 'restart' or 'quit'", chars);
   } else {
-    userInput = promptFor("No results.\n\nEnter 'restart' or 'quit'.", chars)
+    userInput = promptFor(header + "No results.\n\nEnter 'restart' or 'quit'.", chars)
   }
 
   switch(userInput) {
