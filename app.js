@@ -7,47 +7,45 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      let person = searchByName(people);
-      mainMenu(person, people);
+      return mainMenu(searchByName(people), people);
       // add functionality - if more than one person is returned, first display all results and let user determine which to display
-      break;
     case 'no':
-    searchByTraits(people);
-    break;
+      return searchByTraits(people);
+    case 'quit':
+      return;
     default:
-    alert("Wrong! Please try again, following the instructions dummy. :)");
-    app(people); // restart app
+      alert("Wrong! Please try again, following the instructions dummy. :)");
+      app(people); // restart app
     break;
   }
 }
 
 function searchByTraits(people) {
   let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
-  let filteredPeople;
 
   switch(userSearchChoice) {
     case "height":
-      displayPeople(searchByHeight(people));
+      displayPeopleTraitResults(searchByHeight(people));
       return app(people);
 
     case "weight":
-      displayPeople(searchByWeight(people));
+      displayPeopleTraitResults(searchByWeight(people));
       return app(people);
 
   	case "eye color":
-      displayPeople(searchByEyeColor(people));
+      displayPeopleTraitResults(searchByEyeColor(people));
       return app(people);
 
   	case "gender":
-      displayPeople(searchByGender(people));
+      displayPeopleTraitResults(searchByGender(people));
       return app(people);
 
   	case "age":
-      displayPeople(searchByAge(people));
+      displayPeopleTraitResults(searchByAge(people));
       return app(people);
 
   	case "occupation":
-      displayPeople(searchByOccupation(people));
+      displayPeopleTraitResults(searchByOccupation(people));
       return app(people);
 
     default:
@@ -159,12 +157,12 @@ function mainMenu(person, people){
       displayPeople(listDescendants(person, people, 0));
       return mainMenu(person, people);
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -193,6 +191,55 @@ function displayPeople(people){
   } else {
     alert("No results.")
   }
+}
+
+function displayPeopleTraitResults(people){
+  let userInput;
+
+  if(people.length > 0){
+    userInput = prompt(people.map(function(person){
+      return person.firstName + " " + person.lastName;
+    }).join("\n") + "\n\nTo narrow results further, enter the trait you would like to search by - 'height', 'weight', 'eye color' 'gender', 'age', 'occupation' - or enter 'restart' or 'quit'");
+  } else {
+    userInput = prompt("No results.\n\nEnter 'restart' or 'quit'.")
+  }
+
+  switch(userInput) {
+    case "height":
+      displayPeopleTraitResults(searchByHeight(people));
+      return app(people);
+
+    case "weight":
+      displayPeopleTraitResults(searchByWeight(people));
+      return app(people);
+
+    case "eye color":
+      displayPeopleTraitResults(searchByEyeColor(people));
+      return app(people);
+
+    case "gender":
+      displayPeopleTraitResults(searchByGender(people));
+      return app(people);
+
+    case "age":
+      displayPeopleTraitResults(searchByAge(people));
+      return app(people);
+
+    case "occupation":
+      displayPeopleTraitResults(searchByOccupation(people));
+      return app(people);
+
+    case "restart":
+      return app(data);
+
+    case "quit":
+      return;
+
+    default:
+      alert("You entered an invalid search type! Please try again.");
+      return searchByTraits(people);
+  }  
+
 }
 
 function displayPerson(person){
