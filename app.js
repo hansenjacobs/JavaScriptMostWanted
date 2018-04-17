@@ -50,7 +50,7 @@ function searchByTraits(people) {
 }
 
 function searchByHeight(people) {
-  let userInputHeight = promptFor("How tall is the person?", chars);
+  let userInputHeight = promptFor("How tall is the person in inches? Ex. '72'", chars);
 
   let newArray = people.filter(function (el) {
     if(el.height == userInputHeight) {
@@ -62,7 +62,7 @@ function searchByHeight(people) {
 }
 
 function searchByWeight(people) {
-  let userInputWeight = promptFor("How much does the person weigh?", chars);
+  let userInputWeight = promptFor("How much does the person weigh in pounds? Ex. '125'", numbers);
 
   let newArray = people.filter(function (el) {
     if(el.weight == userInputWeight) {
@@ -82,7 +82,7 @@ function searchByEyeColor(people) {
 }
 
 function searchByGender(people){
-  let userInputGender = promptFor("What gender is the person? 'male', 'female'", chars);
+  let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
   let results = people.filter(function(el){
     return el.gender === userInputGender;
   })
@@ -91,7 +91,7 @@ function searchByGender(people){
 }
 
 function searchByAge(people) {
-	let userInputAge = prompt("What age is the person?");
+	let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
 
   let results = people.filter(function(el){
    return calculateAge(new Date(el.dob)) == userInputAge;
@@ -315,4 +315,12 @@ function yesNoQuit(input){
 
 function chars(input){
   return true;
+}
+
+function numbers(input){
+  return isNaN(input);
+}
+
+function gender(input){
+  return input.toLowerCase() === "male" || input.toLowerCase() === "female";
 }
