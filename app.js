@@ -190,7 +190,7 @@ function searchByName(people){
 
   
   results = people.filter(function (el) {
-    if(el.firstName === firstName && el.lastName === lastName){
+    if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()){
       return true;
     }
   });
