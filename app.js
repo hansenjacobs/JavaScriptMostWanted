@@ -26,27 +26,27 @@ function searchByTraits(people) {
   switch(userSearchChoice) {
     case "height":
       displayPeopleTraitResults(searchByHeight(people));
-      return app(people);
+      return;
 
     case "weight":
       displayPeopleTraitResults(searchByWeight(people));
-      return app(people);
+      return;
 
   	case "eye color":
       displayPeopleTraitResults(searchByEyeColor(people));
-      return app(people);
+      return;
 
   	case "gender":
       displayPeopleTraitResults(searchByGender(people));
-      return app(people);
+      return;
 
   	case "age":
       displayPeopleTraitResults(searchByAge(people));
-      return app(people);
+      return;
 
   	case "occupation":
       displayPeopleTraitResults(searchByOccupation(people));
-      return app(people);
+      return;
 
     default:
       alert("You entered an invalid search type! Please try again.");
@@ -233,7 +233,7 @@ function displayPeopleTraitResults(people){
       return app(data);
 
     case "quit":
-      return;
+      break;
 
     default:
       alert("You entered an invalid search type! Please try again.");
