@@ -19,13 +19,13 @@ function searchByTraits(people) {
 
   switch(userSearchChoice.toLowerCase()) {
     case "height":
-	  let userInputHeight = promptFor("How tall is the person?", chars);
+	  let userInputHeight = promptFor("How tall is the person?", numbers);
 	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return;
 
     case "weight":
-	  let userInputWeight = promptFor("How much does the person weigh?", chars);
+	  let userInputWeight = promptFor("How much does the person weigh?", numbers);
 	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
       return;
@@ -238,13 +238,13 @@ function displayPeopleTraitResults(people, header){
 
   switch(userInput.toLowerCase()) {
     case "height":
-	  let userInputHeight = promptFor("How tall is the person?", chars);
+	  let userInputHeight = promptFor("How tall is the person?", numbers);
 	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
       return app(people);
 
     case "weight":
-      let userInputWeight = promptFor("How much does the person weigh?", chars);
+      let userInputWeight = promptFor("How much does the person weigh?", numbers);
 	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
       displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
       return app(people);
