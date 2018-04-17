@@ -229,7 +229,7 @@ function displayPeopleTraitResults(people, header){
   let userInput;
 
   if(people.length > 0){
-    userInput = promptFor(header + people.map(function(person){
+    userInput = promptFor(header.toUpperCase() + people.map(function(person){
       return person.firstName + " " + person.lastName;
     }).join("\n") + "\n\nTo narrow results further, enter the trait you would like to search by - 'height', 'weight', 'eye color' 'gender', 'age', 'occupation' - or enter 'restart' or 'quit'", chars);
   } else {
