@@ -1,5 +1,5 @@
 function app(people){
-  var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no' or 'quit'", yesNo).toLowerCase();
+  var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no' or 'quit'", yesNoQuit).toLowerCase();
   switch(searchType){
     case 'yes':
       return mainMenu(searchByName(people), people);
@@ -275,8 +275,8 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob + "\n";
-  personInfo += "Height: " + person.height + "\n";
-  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Height: " + person.height + "\"\n";
+  personInfo += "Weight: " + person.weight + "lbs\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   
@@ -297,14 +297,19 @@ function listDescendants(person, people, indexPeople, descendants = []){
 
 
 function promptFor(question, valid){
+  let validInput = false;
   do{
     var response = prompt(question).trim();
-  } while(!response || !valid(response));
+    validInput = response && valid(response);
+    if(!validInput){
+      alert("'" + response + "' is not a valid input.  Please try again.")
+    }
+  } while(!validInput);
   return response;
 }
 
 
-function yesNo(input){
+function yesNoQuit(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no" || input.toLowerCase() == "quit";
 }
 
