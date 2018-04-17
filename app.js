@@ -31,11 +31,15 @@ function searchByTraits(people) {
       return;
 
   	case "eye color":
-      displayPeopleTraitResults(searchByEyeColor(people));
+	  let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
+	  let userInputEyeColorString = "PEOPLE WHO HAVE An EYE COLOR OF " + userInputEyeColor + ":" + "\n";
+      displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
       return;
 
   	case "gender":
-      displayPeopleTraitResults(searchByGender(people));
+	  let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
+	  let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n";
+      displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
       return;
 
   	case "age":
@@ -66,25 +70,23 @@ function searchByHeight(people, userInputHeight) {
 
 
 function searchByWeight(people, userInputWeight) {
-  let newArray = people.filter(function (el) {
+  let results = people.filter(function (el) {
     if(el.weight == userInputWeight) {
       return true;
     }
   });
 
-  return newArray;
+  return results;
 }
 
-function searchByEyeColor(people) {
-  let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
+function searchByEyeColor(people, userInputEyeColor) {
   let results = people.filter(function(el){
     return el.eyeColor.toLowerCase() === userInputEyeColor.toLowerCase();
   })
   return results;
 }
 
-function searchByGender(people){
-  let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
+function searchByGender(people, userInputGender){
   let results = people.filter(function(el){
     return el.gender.toLowerCase() === userInputGender.toLowerCase();
   })
@@ -241,15 +243,21 @@ function displayPeopleTraitResults(people, header){
       return app(people);
 
     case "weight":
-      displayPeopleTraitResults(searchByWeight(people));
+      let userInputWeight = promptFor("How much does the person weigh?", chars);
+	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n";
+      displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
       return app(people);
 
     case "eye color":
-      displayPeopleTraitResults(searchByEyeColor(people));
+      let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
+	  let userInputEyeColorString = "PEOPLE WHO HAVE An EYE COLOR OF " + userInputEyeColor + ":" + "\n";
+      displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
       return app(people);
 
     case "gender":
-      displayPeopleTraitResults(searchByGender(people));
+      let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
+	  let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n";
+      displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
       return app(people);
 
     case "age":
