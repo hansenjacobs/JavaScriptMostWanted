@@ -27,38 +27,33 @@ function searchByTraits(people) {
 
   switch(userSearchChoice) {
     case "height":
-      filteredPeople = searchByHeight(people);
-	  displayPeople(newArray);
-      break;
+      displayPeople(searchByHeight(people));
+      return app(people);
+
     case "weight":
-      filteredPeople = searchByWeight(people);
-	  displayPeople(newArray);
-      break;
-	case "eye color":
-    displayPeople(searchByEyeColor(people));
-    return app(people);
+      displayPeople(searchByWeight(people));
+      return app(people);
 
-	case "gender":
-	 displayPeople(searchByGender(people));
-   return app(people);
+  	case "eye color":
+      displayPeople(searchByEyeColor(people));
+      return app(people);
 
-	case "age":
-	 displayPeople(searchByAge(people));
-   return app(people);
+  	case "gender":
+      displayPeople(searchByGender(people));
+      return app(people);
 
-	case "occupation":
-	 displayPeople(searchByOccupation(people));
-   return app(people);
+  	case "age":
+      displayPeople(searchByAge(people));
+      return app(people);
+
+  	case "occupation":
+      displayPeople(searchByOccupation(people));
+      return app(people);
 
     default:
       alert("You entered an invalid search type! Please try again.");
-      searchByTraits(people);
-      break;
+      return searchByTraits(people);
   }  
-
-  let foundPerson = filteredPeople[0];
-
-  mainMenu(foundPerson, people);
 
 }
 
