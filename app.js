@@ -255,16 +255,21 @@ function displayPerson(person, header){
   alert(header + " for " + person.firstName + " " + person.lastName + ":" + "\n\n" + personInfo);
 } 
 
-function listDescendants(person, people, indexPeople, descendants = []){
-  if(people[indexPeople].parents.includes(person.id)){
-      descendants.push(people[indexPeople]);
-    }
+function listDescendants(person, people){
 
-  if(indexPeople < people.length - 1){
-    return listDescendants(person, people, indexPeople + 1, descendants);
-  } else {
+let descendants = [];
+
+  for(let i = 0; i < people.length; i++){
+    if(people[i].parents.includes(person.id)){
+      descendants.push(people[i]);
+    }
+  }
+
+  for(let i = 0; i < descendants.length; i++){
+    descendants = descendants.concat(listDescendants(descendants[i], people));
+  }
+
     return descendants;
-  }  
 }
 
 
