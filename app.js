@@ -17,7 +17,7 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearch = promptFor("Enter the trait(s) and value(s) you would like to search by, using the format of 'trait: value', separating trait/value pairs with a semicolon (;). Available traits: height, weight, eye color, gender, age or occupation.\n\nExample: 'gender: male; age: 60; eye color: blue'", chars).trim();
+  let userSearch = promptFor("Enter the trait(s) and value(s) you would like to search by, using the format of 'trait: value', separating trait/value pairs with a semicolon (;). Available traits: height, weight, eye color, gender, age or occupation.\n\nExample: gender: male; age: 60; eye color: blue", chars).trim();
   let userSearchArray = [];
   
   //trim and remove trailing semicolons
@@ -280,8 +280,8 @@ function listPeopleAsString(people){
 
 function displayPeople(people, header){
   if(people.length > 0){
-    alert(header + people.map(function(person){
-      return person.firstName + " " + person.lastName;
+    alert(header + people.map(function(person, i){
+      return  i + 1 + " " + person.firstName + " " + person.lastName;
     }).join("\n"));
   } else {
     alert("No results.")
