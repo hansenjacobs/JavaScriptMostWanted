@@ -279,8 +279,8 @@ function listPeopleAsString(people){
 
 function displayPeople(people, header){
   if(people.length > 0){
-    alert(header + people.map(function(person){
-      return person.firstName + " " + person.lastName;
+    alert(header + people.map(function(person, i){
+      return  i + 1 + " " + person.firstName + " " + person.lastName;
     }).join("\n"));
   } else {
     alert("No results.")
