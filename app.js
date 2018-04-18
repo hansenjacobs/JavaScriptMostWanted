@@ -17,51 +17,110 @@ function app(people){
 }
 
 function searchByTraits(people) {
+  let userSearch = promptFor("Enter the trait(s) and value(s) you would like to search by, using the format of 'trait: value', separating trait/value pairs with a semicolon (;). Available traits: height, weight, eye color, gender, age or occupation.\n\nExample: 'gender: male; age: 60; eye color: blue'", chars).trim();
+  let userSearchArray = [];
+  
+  //trim and remove trailing semicolons
+  while(userSearch.charAt(userSearch.length - 1) === ";"){
+    userSearch = userSearch.substr(0, userSearch.length - 1).trim();
+  }
 
-  let userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit'", chars);
-
-
-  switch(userSearchChoice.toLowerCase()) {
-    case "height":
-  	  let userInputHeight = promptFor("How tall is the person?", numbers);
-  	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
-
-    case "weight":
-  	  let userInputWeight = promptFor("How much does the person weigh?", numbers);
-  	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
-
-  	case "eye color":
-  	  let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
-  	  let userInputEyeColorString = "PEOPLE WHO HAVE AN EYE COLOR OF " + userInputEyeColor + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
-
-  	case "gender":
-      let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
-      let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
-
-  	case "age":
-      let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-      let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAge + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByAge(people, userInputAge), userInputAgeString);
-
-  	case "occupation":
-  	  let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
-  	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputOccupation + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
-
-    case "quit":
-      return;
-
+  //check if user wants to restart or quit
+  switch(userSearch){
     case "restart":
       return app(data);
 
-    default:
-      alert("You entered an invalid search type! Please try again.");
-      return searchByTraits(people);
-  }  
+    case "quit":
+      return;
+  }
+
+  //split into array at semicolons
+  if(userSearch.search(";") > -1){
+    userSearchArray = userSearch.split(";");  
+  } else {
+    userSearchArray = [userSearch];
+  }
+  
+
+  //loop through each array element and check for valid entry
+  for(let i = 0; i < userSearchArray.length; i++){
+    //extract trait and value from element
+    let trait = userSearchArray[i].substring(0, userSearchArray[i].search(":")).trim()
+    let value = userSearchArray[i].substring(userSearchArray[i].search(":") + 1, ).trim()
+
+    //check for validity of trait and value
+    switch(trait.toLowerCase()){
+      case "height":
+      case "weight":
+      case "age":
+        if(!numbers(value)){
+          alert("User input: " + userSearch + "\n\n '" + value + "' is not a valid number input for the " + trait + " trait.  Please try again.");
+          return searchByTraits(data);
+        }
+        break;
+
+      case "eye color":
+      case "occupation":
+        if(!chars(value)){
+          alert("User input: " + userSearch + "\n\n '" + value + "' is not a valid input for the " + trait + " trait.  Please try again.");
+          return searchByTraits(data);
+        }
+        break;
+
+      case "gender":
+        if(!gender(value)){
+          alert("User input: " + userSearch + "\n\n '" + value + "' is not a valid input for the " + trait + " trait.  Please try again with a value of 'male' or 'female' for the gender trait.");
+          return searchByTraits(data);
+        }
+        break;
+
+      default:
+        alert("User input: " + userSearch + "\n\n'" + trait + "' is not a valid trait, please try again.");
+        return searchByTraits(data);
+    }
+  }
+
+  //filter people for trait
+  for(let i = 0; i < userSearchArray.length; i++){
+    //extract trait and value from element
+    let trait = userSearchArray[i].substring(0, userSearchArray[i].search(":")).trim()
+    let value = userSearchArray[i].substring(userSearchArray[i].search(":") + 1, ).trim()
+
+    //filter
+    switch(trait.toLowerCase()){
+      case "height":
+        people = searchByHeight(people, value);
+        break;
+
+      case "weight":
+        people = searchByWeight(people, value);
+        break;
+
+      case "age":
+        people = searchByAge(people, value);
+        break;
+
+      case "eye color":
+        people = searchByEyeColor(people, value);
+        break;
+
+      case "occupation":
+        people = searchByOccupation(people, value);
+        break;
+
+      case "gender":
+        people = searchByGender(people, value);
+        break;
+
+      default:
+        alert("There was an error searching for '" + userSearch + "'.  Please try again.");
+        return searchByTraits(data);
+    }
+  }
+
+  //display results
+  displayPeople(people, "RESULTS FOR '" + userSearch.toUpperCase() + "'\n\n");
+  return app(data);
 
 }
 
