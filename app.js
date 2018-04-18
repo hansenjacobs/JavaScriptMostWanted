@@ -16,10 +16,10 @@ function app(people){
   }
 }
 
-function searchByTraits(people, userSearchChoice) {
-  if(userSearchChoice === undefined){
-    userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit'", chars);
-  }
+function searchByTraits(people) {
+
+  let userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit'", chars);
+
 
   switch(userSearchChoice.toLowerCase()) {
     case "height":
