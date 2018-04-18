@@ -1,3 +1,5 @@
+"use strict";
+
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no' or 'quit'", yesNoQuit).toLowerCase();
   switch(searchType.toLowerCase()){

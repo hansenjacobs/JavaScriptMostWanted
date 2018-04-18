@@ -1,0 +1,15 @@
+Most Wanted High Level Tasks
+	User Interface
+		App Menu
+			Z Search by Name // Update to handle multiple results (multiple people with same name)
+			X	Display All Record Details
+			X	List Decendants (Must use recursion)
+			X	List Family (Must use iteration)
+			Z Search by Traits (age, height, weight, occupation, eye color) (Must use Map & Filter) // Update to handle multiple traits at once
+				User enters in format 'trait:value', multiple traits can be entered by separating by a semi-colon
+			X Display Decendants
+			X Display Immediate Family
+			_ Clean up tasks
+			_	Splice into additional function
+			_	Ability to quit/restart from any prompt
+			_	Remove comments
