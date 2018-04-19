@@ -1,3 +1,5 @@
+"use strict";
+
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes', 'no' or 'quit'", yesNoQuit).toLowerCase();
   switch(searchType.toLowerCase()){
@@ -14,64 +16,95 @@ function app(people){
   }
 }
 
-function searchByTraits(people, userSearchChoice) {
-  if(userSearchChoice === undefined){
-    userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit'", "enter all that apply", chars);
+function searchByTraits(people) {
+    let userSearchChoice = promptFor("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'restart', or 'quit', 'enter all that apply'", chars);
+	let userSearchChoiceArray = userSearchChoice.split(" ");
+	let i = 0;
+    while (i < userSearchChoiceArray.length){
+		if (userSearchChoice[i] == "height"){
+			console.log(searchByHeight(people));
+		}
+		else if (userSearchChoice[i] == "weight"){
+			console.log(searchByWeight(people));
+		}
+		else if (userSearchChoice[i] == "eye color"){
+			console.log(searchByEyeColor(people));
+		}
+		else if (userSearchChoice[i] == "gender"){
+			console.log(searchByGender(people));
+		}
+		else if (userSearchChoice[i] == "age"){
+			console.log(searchByAge(people));
+		}
+		else if (userSearchChoice[i] == "occupation"){
+			console.log(searchByOccupation(people));
+		}
+		else if (userSearchChoice[i] == "quit"){
+			return;
+		}
+		else if (userSearchChoice[i] == "restart"){
+			return app(data);
+		}
+		else {
+			alert("You entered an invalid search type!  Please try again.");
+			return searchByTraits(People);
+		}
+	}
   }
 
-  switch(userSearchChoice.toLowerCase()) {
-    case "height":
-  	  let userInputHeight = promptFor("How tall is the person?", numbers);
-  	  let userInputHeightString = "PEOPLE WHO HAVE A HEIGHT OF " + userInputHeight + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
 
-    case "weight":
-  	  let userInputWeight = promptFor("How much does the person weigh?", numbers);
-  	  let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
+  // switch(userSearchChoice.toLowerCase()) {
+    // case "height":
+      // return displayPeopleTraitResults(searchByHeight(people, userInputHeight), userInputHeightString);
 
-  	case "eye color":
-  	  let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
-  	  let userInputEyeColorString = "PEOPLE WHO HAVE AN EYE COLOR OF " + userInputEyeColor + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
+    // case "weight":
+  	  // let userInputWeight = promptFor("How much does the person weigh?", numbers);
+  	  // let userInputWeightString = "PEOPLE WHO HAVE A WEIGHT OF " + userInputWeight + ":" + "\n\n";
+      // return displayPeopleTraitResults(searchByWeight(people, userInputWeight), userInputWeightString);
 
-  	case "gender":
-      let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
-      let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
+  	// case "eye color":
+  	  // let userInputEyeColor = promptFor("What color eyes does the person have? 'black', 'blue', 'brown', 'green', 'hazel'", chars);
+  	  // let userInputEyeColorString = "PEOPLE WHO HAVE AN EYE COLOR OF " + userInputEyeColor + ":" + "\n\n";
+      // return displayPeopleTraitResults(searchByEyeColor(people, userInputEyeColor), userInputEyeColorString);
 
-  	case "age":
-      let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
-      let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAge + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByAge(people, userInputAge), userInputAgeString);
+  	// case "gender":
+      // let userInputGender = promptFor("What gender is the person? 'male', 'female'", gender);
+      // let userInputGenderString = "PEOPLE WHO IDENTIFY AS " + userInputGender + ":" + "\n\n";
+      // return displayPeopleTraitResults(searchByGender(people, userInputGender), userInputGenderString);
 
-  	case "occupation":
-  	  let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
-  	  let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputOccupation + ":" + "\n\n";
-      return displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
+  	// case "age":
+      // let userInputAge = promptFor("What age is the person? Ex. '62'", numbers);
+      // let userInputAgeString = "PEOPLE WHO HAVE AN AGE OF " + userInputAge + ":" + "\n\n";
+      // return displayPeopleTraitResults(searchByAge(people, userInputAge), userInputAgeString);
 
-    case "quit":
-      return;
+  	// case "occupation":
+  	  // let userInputOccupation = promptFor("What occupation does the person have? Such as 'architect', 'assistant', 'doctor', 'landscaper', 'politician', 'programmer'", chars);
+  	  // let userInputOccupationString = "PEOPLE WHO HAVE AN OCCUPATION OF " + userInputOccupation + ":" + "\n\n";
+      // return displayPeopleTraitResults(searchByOccupation(people, userInputOccupation), userInputOccupationString);
 
-    case "restart":
-      return app(data);
+    // case "quit":
+      // return;
 
-    default:
-      alert("You entered an invalid search type! Please try again.");
-      return searchByTraits(people);
-  }  
+    // case "restart":
+      // return app(data);
 
-}
+    // default:
+      // alert("You entered an invalid search type! Please try again.");
+      // return searchByTraits(people);
+  // }  
+
+// }
 
 
-function searchByHeight(people, userInputHeight) {
-  let newArray = people.filter(function (el) {
+function searchByHeight(people) {
+	let userInputHeight = promptFor("How tall is the person?", numbers);
+    let result = people.filter(function (el) {
     if(el.height == userInputHeight) {
       return true;
     }
   });
 
-  return newArray;
+  return result;
 }
 
 
@@ -86,14 +119,14 @@ function searchByWeight(people, userInputWeight) {
 }
 
 function searchByEyeColor(people, userInputEyeColor) {
-  let results = people.filter(function(el){
+  let results = people.filter(function(el) {
     return el.eyeColor.toLowerCase() === userInputEyeColor.toLowerCase();
   })
   return results;
 }
 
 function searchByGender(people, userInputGender){
-  let results = people.filter(function(el){
+  let results = people.filter(function(el) {
     return el.gender.toLowerCase() === userInputGender.toLowerCase();
   })
   return results;
@@ -263,6 +296,7 @@ function listDescendants(person, people, indexPeople, descendants = []){
   if(indexPeople < people.length - 1){
     return listDescendants(person, people, indexPeople + 1, descendants);
   } else {
+	  
     return descendants;
   }  
 }
