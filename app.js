@@ -280,27 +280,12 @@ function listPeopleAsString(people){
 
 function displayPeople(people, header){
   if(people.length > 0){
-    alert(header + people.map(function(person, i){
-      return  i + 1 + " " + person.firstName + " " + person.lastName;
+    alert(header + people.map(function(person){
+      return  person.firstName + " " + person.lastName;
     }).join("\n"));
   } else {
     alert("No results.")
   }
-}
-
-function displayPeopleTraitResults(people, header){
-  let userInput;
-
-  if(people.length > 0){
-    userInput = promptFor(header.toUpperCase() + people.map(function(person){
-      return person.firstName + " " + person.lastName;
-    }).join("\n") + "\n\nTo narrow results further, enter the trait you would like to search by - 'height', 'weight', 'eye color' 'gender', 'age', 'occupation' - or enter 'restart' or 'quit'", chars);
-  } else {
-    userInput = promptFor(header + "No results.\n\nEnter 'restart' or 'quit'.", chars)
-  }
-
-  return searchByTraits(people, userInput);  
-
 }
 
 function displayPerson(person, header){
