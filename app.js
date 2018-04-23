@@ -16,6 +16,7 @@ function app(people){
   }
 }
 
+
 function searchByTraits(people) {
   let userSearch = promptFor("Enter the trait(s) and value(s) you would like to search by, using the format of 'trait: value', separating trait/value pairs with a semicolon (;). Available traits: height, weight, eye color, gender, age or occupation.\n\nExample: gender: male; age: 60; eye color: blue", chars).trim();
   let userSearchArray = [];
